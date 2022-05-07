@@ -1,0 +1,15 @@
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: devops-toolkit
+  labels:
+    workload-type: pre-built
+spec:
+  image: vfarcic/devops-toolkit-series:5.0.5
+  resources:
+    limits:
+      cpu: 100m
+      memory: 256Mi
+    requests:
+      cpu: 80m
+      memory: 128Mi

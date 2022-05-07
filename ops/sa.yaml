@@ -1,0 +1,75 @@
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cartographer
+  namespace: default
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: deploy-image
+rules:
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - list
+  - create
+  - update
+  - delete
+  - patch
+  - watch
+  - get
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: build-image
+rules:
+- apiGroups:
+  - kpack.io
+  resources:
+  - images
+  verbs:
+  - list
+  - create
+  - update
+  - delete
+  - patch
+  - watch
+  - get
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: deploy-image
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: deploy-image
+subjects:
+- kind: ServiceAccount
+  name: cartographer
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: build-image
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: build-image
+subjects:
+- kind: ServiceAccount
+  name: cartographer

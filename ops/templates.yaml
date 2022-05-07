@@ -1,0 +1,78 @@
+---
+
+apiVersion: carto.run/v1alpha1
+kind: ClusterTemplate
+metadata:
+  name: app-deployment
+spec:
+  template:
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: $(workload.metadata.name)$
+      labels:
+        app: $(workload.metadata.name)$
+    spec:
+      replicas: $(params.replicas)$
+      selector:
+        matchLabels:
+          app: $(workload.metadata.name)$
+      template:
+        metadata:
+          labels:
+            app: $(workload.metadata.name)$
+        spec:
+          containers:
+          - name: main
+            image: $(images.buildImage.image)$
+            ports:
+            - containerPort: $(params.port)$
+            livenessProbe:
+              httpGet:
+                path: /
+                port: $(params.port)$
+            readinessProbe:
+              httpGet:
+                path: /
+                port: $(params.port)$
+            resources:
+              limits:
+                cpu: $(workload.spec.resources.limits.cpu)$
+                memory: $(workload.spec.resources.limits.memory)$
+              requests:
+                cpu: $(workload.spec.resources.requests.cpu)$
+                memory: $(workload.spec.resources.requests.memory)$
+  params:
+  - name: replicas
+    default: "1"
+  - name: port
+    default: "80"
+
+---
+
+apiVersion: carto.run/v1alpha1
+kind: ClusterImageTemplate
+metadata:
+  name: image-builder
+spec:
+  template:
+    apiVersion: kpack.io/v1alpha2
+    kind: Image
+    metadata:
+      name: $(workload.metadata.name)$
+    spec:
+      tag: $(params.image_prefix)$$(workload.metadata.name)$
+      serviceAccountName: $(params.image-pull-sa-name)$
+      builder:
+        kind: ClusterBuilder
+        name: my-builder
+      source:
+        git:
+          url: $(workload.spec.source.git.url)$
+          revision: $(workload.spec.source.git.ref.branch)$
+  params:
+  - name: image-pull-sa-name
+    default: expected-service-account
+  - name: image_prefix
+    default: index.docker.io/vfarcic
+  imagePath: .status.latestImage
