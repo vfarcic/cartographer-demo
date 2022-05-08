@@ -74,5 +74,5 @@ spec:
   - name: image-pull-sa-name
     default: expected-service-account
   - name: image_prefix
-    default: index.docker.io/vfarcic
+    default: index.docker.io/
   imagePath: .status.latestImage

@@ -14,9 +14,9 @@ spec:
     templateRef:
       kind: ClusterTemplate
       name: app-deployment
-      images:
-      - resource: build-image
-        name: buildImage
+    images:
+    - resource: build-image
+      name: buildImage
   serviceAccountRef:
     name: cartographer
     namespace: default
