@@ -38,12 +38,13 @@ spec:
 ---
 
 apiVersion: kpack.io/v1alpha2
-kind: Builder
+kind: ClusterBuilder
 metadata:
   name: silly-demo
-  namespace: default
 spec:
-  serviceAccountName: registry-creds
+  serviceAccountRef:
+    name: registry-creds
+    namespace: default
   tag: vfarcic/silly-demo
   stack:
     name: base

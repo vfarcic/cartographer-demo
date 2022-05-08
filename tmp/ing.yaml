@@ -1,9 +1,9 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: devops-toolkit
+  name: silly-demo
   labels:
-    app: devops-toolkit
+    app: silly-demo
   annotations:
     kubernetes.io/ingress.class: nginx
 spec:
@@ -11,6 +11,6 @@ spec:
   - http:
       paths:
       - backend:
-          serviceName: devops-toolkit
+          serviceName: silly-demo
           servicePort: 80
     host: devopstoolkitseries.com

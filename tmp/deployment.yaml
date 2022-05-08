@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: devops-toolkit
+  name: silly-demo
   labels:
-    app: devops-toolkit
+    app: silly-demo
 spec:
   selector:
     matchLabels:
-      app: devops-toolkit
+      app: silly-demo
   template:
     metadata:
       labels:
-        app: devops-toolkit
+        app: silly-demo
     spec:
       containers:
-      - name: devops-toolkit
-        image: vfarcic/devops-toolkit-series:latest
+      - name: silly-demo
+        image: vfarcic/silly-demo:latest
         ports:
         - containerPort: 80
         livenessProbe:

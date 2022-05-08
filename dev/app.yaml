@@ -1,11 +1,10 @@
 apiVersion: carto.run/v1alpha1
 kind: Workload
 metadata:
-  name: devops-toolkit
+  name: silly-demo
   labels:
-    workload-type: pre-built
+    workload-type: source-code
 spec:
-  image: vfarcic/devops-toolkit-series:5.0.5
   resources:
     limits:
       cpu: 100m
@@ -13,3 +12,8 @@ spec:
     requests:
       cpu: 80m
       memory: 128Mi
+  source:
+    git:
+      ref:
+        branch: main
+      url: https://github.com/vfarcic/cartographer-demo

@@ -65,14 +65,14 @@ spec:
       serviceAccountName: $(params.image-pull-sa-name)$
       builder:
         kind: ClusterBuilder
-        name: my-builder
+        name: silly-demo
       source:
         git:
           url: $(workload.spec.source.git.url)$
           revision: $(workload.spec.source.git.ref.branch)$
   params:
   - name: image-pull-sa-name
-    default: expected-service-account
+    default: registry-creds
   - name: image_prefix
     default: index.docker.io/
   imagePath: .status.latestImage

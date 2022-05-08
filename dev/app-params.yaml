@@ -1,11 +1,11 @@
 apiVersion: carto.run/v1alpha1
 kind: Workload
 metadata:
-  name: devops-toolkit
+  name: silly-demo
   labels:
     workload-type: pre-built
 spec:
-  image: vfarcic/devops-toolkit-series:5.0.5
+  image: vfarcic/silly-demo:5.0.5
   resources:
     limits:
       cpu: 100m
