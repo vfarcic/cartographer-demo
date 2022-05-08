@@ -5,6 +5,11 @@ metadata:
   labels:
     workload-type: source-code
 spec:
+  source:
+    git:
+      ref:
+        branch: main
+      url: https://github.com/vfarcic/cartographer-demo
   resources:
     limits:
       cpu: 100m
@@ -12,8 +17,3 @@ spec:
     requests:
       cpu: 80m
       memory: 128Mi
-  source:
-    git:
-      ref:
-        branch: main
-      url: https://github.com/vfarcic/cartographer-demo

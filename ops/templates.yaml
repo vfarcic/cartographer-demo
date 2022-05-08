@@ -44,9 +44,9 @@ spec:
                 memory: $(workload.spec.resources.requests.memory)$
   params:
   - name: replicas
-    default: "1"
+    default: 1
   - name: port
-    default: "80"
+    default: 8080
 
 ---
 
@@ -61,7 +61,7 @@ spec:
     metadata:
       name: $(workload.metadata.name)$
     spec:
-      tag: $(params.image_prefix)$$(workload.metadata.name)$
+      tag: $(params.image_prefix)$/$(workload.metadata.name)$
       serviceAccountName: $(params.image-pull-sa-name)$
       builder:
         kind: ClusterBuilder
@@ -74,5 +74,5 @@ spec:
   - name: image-pull-sa-name
     default: registry-creds
   - name: image_prefix
-    default: index.docker.io/
+    default: index.docker.io/vfarcic
   imagePath: .status.latestImage

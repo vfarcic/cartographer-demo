@@ -3,9 +3,13 @@ kind: Workload
 metadata:
   name: silly-demo
   labels:
-    workload-type: pre-built
+    workload-type: source-code
 spec:
-  image: vfarcic/silly-demo:5.0.5
+  source:
+    git:
+      ref:
+        branch: main
+      url: https://github.com/vfarcic/cartographer-demo
   resources:
     limits:
       cpu: 100m
